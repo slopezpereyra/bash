@@ -1,5 +1,5 @@
 #!/bin/zsh 
-#
+#!/usr/bin/env bash
 # For reference, see the documentation: 
 # https://man7.org/linux/man-pages/man1/tmux.1.html
 
@@ -23,8 +23,11 @@ if [ $? != 0 ]; then
     if [[ "$1" == "eeg" ]]; then
         tmux split-window -h; n
         tmux send 'R' ENTER
+        tmux split-window -v; n
+        tmux send 'rstudio' ENTER; n
     else
         tmux send "activate" ENTER
+        tmux send "clear" ENTER
     fi
     tmux new-window -c $DIR -n editing -t 1
     tmux send "$START_EDIT_COMMAND" ENTER
